@@ -1,2 +1,2 @@
 web: vendor/bin/heroku-php-apache2 public/
-release: php artisan migrate:reset --force
+release: php artisan migrate:refresh --force
