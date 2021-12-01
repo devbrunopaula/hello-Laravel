@@ -21,7 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/posts/{slug}', [PostController::class, 'search']);
 
 Route::resource('posts', PostController::class);
 
