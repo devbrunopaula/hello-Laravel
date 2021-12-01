@@ -36,7 +36,24 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $request->validate([
+            'title'=>'required',
+            'content'=>'required',
+            'slug'=>'required'
+        ]);
+
+        // $post = new Post([
+        //     'title' => $request -> get('title'),
+        //     'content' => $request -> get('content'),
+        //     'slug' => $request -> get('slug'),
+        // ]);
+
+        // $data = $post->save();
+
+       return Post::create($request->all());
+
+        
+
     }
 
     /**
@@ -47,7 +64,12 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+    
+        $data =  Post::findOrFail($id);
+
+        return $data;
+        
+      
     }
 
     /**
@@ -70,7 +92,9 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post=Post::find($id);
+        $post->update($request->all());
+        return $post;
     }
 
     /**
@@ -81,6 +105,12 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Post::destroy($id);
+    }
+
+    public function search($slug)
+    {
+     
+        return Post::where('slug','like','%'.$slug.'%')->get();
     }
 }
